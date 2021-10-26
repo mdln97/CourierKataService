@@ -1,5 +1,9 @@
-﻿using NUnit.Framework;
+﻿using Delivery.Logic.Interfaces;
+using Delivery.Logic.NUnitTest.Helpers;
+using Delivery.Logic.Services;
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Delivery.Logic.NUnitTest.Services
 {
@@ -17,22 +21,30 @@ namespace Delivery.Logic.NUnitTest.Services
         public void CalculateDeliveryCosts_UseMixOfParcels_GetCorrectCalculus()
         {
             // Arrange
+            List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),
+                ParcelHelper.GetLargeParcel(), ParcelHelper.GetMediumParcel(), ParcelHelper.GetXLParcel() };
+
+            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
+                + ParcelHelper.GetMediumParcel().ParcelCost + ParcelHelper.GetXLParcel().ParcelCost;
 
             // Act
+            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(parcels);
 
             // Assert
-            throw new NotImplementedException();
+            Assert.AreEqual(expectedCosts, actualCost);
         }
 
         [Test]
         public void CalculateDeliveryCosts_UseNoParcels_GetResult0()
         {
             // Arrange
+            int expectedCost = 0;
 
             // Act
+            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(new List<IParcel>());
 
             // Assert
-            throw new NotImplementedException();
+            Assert.AreEqual(expectedCost, actualCost);
         }
 
 
@@ -40,11 +52,16 @@ namespace Delivery.Logic.NUnitTest.Services
         public void CalculateDeliveryCosts_UseSmallParcelsOnly_GetCorrectCalculus()
         {
             // Arrange
+            List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),
+               };
+
+            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3;
 
             // Act
+            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(parcels);
 
             // Assert
-            throw new NotImplementedException();
+            Assert.AreEqual(expectedCosts, actualCost);
         }
 
         #endregion

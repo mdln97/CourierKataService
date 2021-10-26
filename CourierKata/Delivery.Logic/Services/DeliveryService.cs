@@ -1,5 +1,6 @@
 ﻿using Delivery.Logic.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Delivery.Logic.Services
 {
@@ -7,7 +8,7 @@ namespace Delivery.Logic.Services
     {
         public int CalculateParcelDeliveryCosts(IEnumerable<IParcel> parcels)
         {
-            throw new System.NotImplementedException();
+            return parcels.Sum(x => x.ParcelCost);
         }
     }
 }

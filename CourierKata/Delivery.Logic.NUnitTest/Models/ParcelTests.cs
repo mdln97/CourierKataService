@@ -1,4 +1,5 @@
 ﻿using Delivery.Logic.Enums;
+using Delivery.Logic.Models;
 using NUnit.Framework;
 using System;
 
@@ -26,12 +27,11 @@ namespace Delivery.Logic.NUnitTest.Models
         [TestCase(-1, 0, -1)]
         public void CreateParcel_UseInvalidDimensionValues_ThrowsArgumentException(int length, int width, int height)
         {
-            // Arrange
+            // Arrange 
 
             // Act
-
             // Assert
-            throw new NotImplementedException();
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Parcel(length, width, height));
         }
 
         [Test]
@@ -40,12 +40,17 @@ namespace Delivery.Logic.NUnitTest.Models
         public void CreateParcel_UseValidDimensions_NewParcelIsCreated(int length, int width, int height)
         {
             // Arrange
+            var expectedLength = length;
+            var expectedWidth = width;
+            var expectedHeight = height;
 
             // Act
+            var createdParcel = new Parcel(length, width, height);
 
             // Assert
-
-            throw new NotImplementedException();
+            Assert.AreEqual(expectedLength, createdParcel.Length);
+            Assert.AreEqual(expectedWidth, createdParcel.Width);
+            Assert.AreEqual(expectedHeight, createdParcel.Height);
         }
 
         #endregion
@@ -70,10 +75,8 @@ namespace Delivery.Logic.NUnitTest.Models
             // Arrange
 
             // Act
-
-            // Assert
-
-            throw new NotImplementedException();
+            var newParcel = new Parcel(length, width, height);
+            return newParcel.ParcelSize;
         }
 
         #endregion
@@ -98,10 +101,8 @@ namespace Delivery.Logic.NUnitTest.Models
             // Arrange
 
             // Act
-
-            // Assert
-
-            throw new NotImplementedException();
+            var newParcel = new Parcel(length, width, height);
+            return newParcel.ParcelCost;
         }
 
         #endregion
