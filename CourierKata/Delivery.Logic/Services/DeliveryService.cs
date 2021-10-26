@@ -6,9 +6,14 @@ namespace Delivery.Logic.Services
 {
     public class DeliveryService : IDeliveryService
     {
-        public int CalculateParcelDeliveryCosts(IEnumerable<IParcel> parcels)
+        public int CalculateDeliveryCosts(IEnumerable<IParcel> parcels)
         {
             return parcels.Sum(x => x.ParcelCost);
+        }
+
+        public int CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels)
+        {
+            return parcels.Sum(x => x.ParcelCost) * 2;
         }
     }
 }

@@ -4,6 +4,8 @@ namespace Delivery.Logic.Interfaces
 {
     public interface IDeliveryService
     {
-        int CalculateParcelDeliveryCosts(IEnumerable<IParcel> parcels);
+        int CalculateDeliveryCosts(IEnumerable<IParcel> parcels);
+
+        int CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels);
     }
 }

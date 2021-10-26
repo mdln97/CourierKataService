@@ -28,7 +28,7 @@ namespace Delivery.Logic.NUnitTest.Services
                 + ParcelHelper.GetMediumParcel().ParcelCost + ParcelHelper.GetXLParcel().ParcelCost;
 
             // Act
-            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(parcels);
+            var actualCost = new DeliveryService().CalculateDeliveryCosts(parcels);
 
             // Assert
             Assert.AreEqual(expectedCosts, actualCost);
@@ -41,7 +41,7 @@ namespace Delivery.Logic.NUnitTest.Services
             int expectedCost = 0;
 
             // Act
-            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(new List<IParcel>());
+            var actualCost = new DeliveryService().CalculateDeliveryCosts(new List<IParcel>());
 
             // Assert
             Assert.AreEqual(expectedCost, actualCost);
@@ -58,7 +58,57 @@ namespace Delivery.Logic.NUnitTest.Services
             int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3;
 
             // Act
-            var actualCost = new DeliveryService().CalculateParcelDeliveryCosts(parcels);
+            var actualCost = new DeliveryService().CalculateDeliveryCosts(parcels);
+
+            // Assert
+            Assert.AreEqual(expectedCosts, actualCost);
+        }
+
+        #endregion
+
+        #region Calculate Speedy Delivery Costs
+        [Test]
+        public void CalculateSpeedyDeliveryCosts_UseMixOfParcels_GetCorrectCalculus()
+        {
+            // Arrange
+            List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),
+                ParcelHelper.GetLargeParcel(), ParcelHelper.GetMediumParcel(), ParcelHelper.GetXLParcel() };
+
+            int expectedCosts = 2 * (ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
+                + ParcelHelper.GetMediumParcel().ParcelCost + ParcelHelper.GetXLParcel().ParcelCost);
+
+            // Act
+            var actualCost = new DeliveryService().CalculateSpeedyDeliveryCosts(parcels);
+
+            // Assert
+            Assert.AreEqual(expectedCosts, actualCost);
+        }
+
+        [Test]
+        public void CalculateSpeedyDeliveryCosts_UseNoParcels_GetResult0()
+        {
+            // Arrange
+            int expectedCost = 0;
+
+            // Act
+            var actualCost = new DeliveryService().CalculateSpeedyDeliveryCosts(new List<IParcel>());
+
+            // Assert
+            Assert.AreEqual(expectedCost, actualCost);
+        }
+
+
+        [Test]
+        public void CalculateSpeedyDeliveryCosts_UseSmallParcelsOnly_GetCorrectCalculus()
+        {
+            // Arrange
+            List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),
+               };
+
+            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3 * 2;
+
+            // Act
+            var actualCost = new DeliveryService().CalculateSpeedyDeliveryCosts(parcels);
 
             // Assert
             Assert.AreEqual(expectedCosts, actualCost);
