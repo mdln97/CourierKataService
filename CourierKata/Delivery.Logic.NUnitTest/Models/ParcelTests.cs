@@ -78,6 +78,10 @@ namespace Delivery.Logic.NUnitTest.Models
         [TestCase(5, 70, 197, ExpectedResult = ParcelSizeType.XL)]
         [TestCase(50, 70, 200, ExpectedResult = ParcelSizeType.XL)]
         [TestCase(100, 150, 97, ExpectedResult = ParcelSizeType.XL)]
+
+        // Heavy weight
+        [TestCase(3, 5, 6, 60, ExpectedResult = ParcelSizeType.Heavy)]
+        [TestCase(20, 5, 6, 60, ExpectedResult = ParcelSizeType.Heavy)]
         public ParcelSizeType GetParcelSize_GetCorrectParcelSize_ExpectedParcelSizeType(int length, int width, int height)
         {
             // Arrange
@@ -117,6 +121,14 @@ namespace Delivery.Logic.NUnitTest.Models
         [TestCase(100, 150, 97, ExpectedResult = 25)]
         // over weight
         [TestCase(49, 150, 27, 11, ExpectedResult = 27)]
+
+
+        // should be categorised as heavy to be cheaper, correct?
+        [TestCase(100, 150, 97, 32, ExpectedResult = 25)]
+
+        // Heavy
+        [TestCase(5, 7, 100, 53, ExpectedResult = 53)]
+        [TestCase(5, 70, 197, 75, ExpectedResult = 75)]
         public double GetParcelCost_GetCorrectParcelCost_ExpectedParcelCost(int length, int width, int height, int weight = 1)
         {
             // Arrange

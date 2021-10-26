@@ -23,7 +23,7 @@ namespace Delivery.ConsoleApp
             Console.WriteLine("Parcels:");
             foreach(var el in orderSummary.Parcels)
             {
-                Console.WriteLine($"Parcel Cost: {el.ParcelCost}");
+                Console.WriteLine($"Parcel Cost: {el.ParcelCost} and Parcel Type: {el.ParcelSize.ToString()}");
             }
             Console.WriteLine($"Regular delivery cost: {orderSummary.RegularDelivery}");
             Console.WriteLine($"Speedy delivery cost: {orderSummary.SpeedyDelivery}");
