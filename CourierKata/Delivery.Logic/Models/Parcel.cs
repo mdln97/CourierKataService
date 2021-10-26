@@ -77,6 +77,9 @@ namespace Delivery.Logic.Models
         {
             get
             {
+                if(Weight > 50)
+                    return ParcelSizeType.Heavy;
+
                 if (Length >= 100 || Width >= 100 || Height >= 100)
                     return ParcelSizeType.XL;
 
@@ -98,13 +101,15 @@ namespace Delivery.Logic.Models
             {
                 double price = ParcelSize switch
                 {
-                    ParcelSizeType.Small => GetCost(Settings.SMALL_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.SMALL_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE),
+                    ParcelSizeType.Small => GetCost(Settings.SMALL_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.SMALL_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE_PER_KG),
 
-                    ParcelSizeType.Medium => GetCost(Settings.MEDIUM_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.MEDIUM_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE),
+                    ParcelSizeType.Medium => GetCost(Settings.MEDIUM_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.MEDIUM_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE_PER_KG),
 
-                    ParcelSizeType.Large => GetCost(Settings.LARGE_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.LARGE_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE),
+                    ParcelSizeType.Large => GetCost(Settings.LARGE_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.LARGE_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE_PER_KG),
 
-                    ParcelSizeType.XL => GetCost(Settings.XL_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.XL_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE),
+                    ParcelSizeType.XL => GetCost(Settings.XL_PARCEL_MAX_WEIGHT_NO_EXTRA_CHARGE, Settings.XL_PARCEL_COST, Settings.OVER_WEIGHT_PARCEL_EXTRA_CHAGE_PER_KG),
+
+                    ParcelSizeType.Heavy => GetCost(Settings.HEAVY_PARCEL_WEIGHT_LIMIT, Settings.HEAVY_PARCEL_COST, Settings.OVER_WEIGHT_HEAVY_PARCEL_EXTRA_CHAGE_PER_KG),
 
                     _ => throw new ArgumentOutOfRangeException(nameof(ParcelSize))
                 };

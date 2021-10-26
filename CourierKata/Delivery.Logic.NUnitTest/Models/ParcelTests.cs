@@ -82,10 +82,9 @@ namespace Delivery.Logic.NUnitTest.Models
         // Heavy weight
         [TestCase(3, 5, 6, 60, ExpectedResult = ParcelSizeType.Heavy)]
         [TestCase(20, 5, 6, 60, ExpectedResult = ParcelSizeType.Heavy)]
-        public ParcelSizeType GetParcelSize_GetCorrectParcelSize_ExpectedParcelSizeType(int length, int width, int height)
+        public ParcelSizeType GetParcelSize_GetCorrectParcelSize_ExpectedParcelSizeType(int length, int width, int height, int weight = 1)
         {
             // Arrange
-            int weight = 3;
 
             // Act
             var newParcel = new Parcel(length, width, height, weight);
@@ -123,8 +122,8 @@ namespace Delivery.Logic.NUnitTest.Models
         [TestCase(49, 150, 27, 11, ExpectedResult = 27)]
 
 
-        // should be categorised as heavy to be cheaper, correct?
-        [TestCase(100, 150, 97, 32, ExpectedResult = 25)]
+        // should be categorised as heavy to be cheaper ?
+        [TestCase(100, 150, 97, 32, ExpectedResult = 69)]
 
         // Heavy
         [TestCase(5, 7, 100, 53, ExpectedResult = 53)]
