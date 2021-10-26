@@ -61,15 +61,19 @@ namespace Delivery.Logic.NUnitTest.Models
 
         #region Get Parcel Size
         [Test]
+        // Small Parcel
         [TestCase(5, 6, 7, ExpectedResult = ParcelSizeType.Small)]
 
+        // Medium Parcel
         [TestCase(5, 20, 7, ExpectedResult = ParcelSizeType.Medium)]
         [TestCase(49, 43, 27, ExpectedResult = ParcelSizeType.Medium)]
 
+        // Large parcel
         [TestCase(5, 80, 7, ExpectedResult = ParcelSizeType.Large)]
         [TestCase(20, 30, 97, ExpectedResult = ParcelSizeType.Large)]
         [TestCase(50, 70, 97, ExpectedResult = ParcelSizeType.Large)]
 
+        // XL parcel
         [TestCase(5, 7, 100, ExpectedResult = ParcelSizeType.XL)]
         [TestCase(5, 70, 197, ExpectedResult = ParcelSizeType.XL)]
         [TestCase(50, 70, 200, ExpectedResult = ParcelSizeType.XL)]
@@ -88,27 +92,31 @@ namespace Delivery.Logic.NUnitTest.Models
 
         #region Get Parcel Cost
         [Test]
+        // Small Parcel
         [TestCase(5, 6, 7, ExpectedResult = 3)]
         // over weight
         [TestCase(5, 6, 7, 2, ExpectedResult = 5)]
 
+        // Medium Parcel
         [TestCase(5, 20, 7, ExpectedResult = 8)]
         [TestCase(49, 43, 27, ExpectedResult = 8)]
         // over weight
         [TestCase(49, 43, 27, 4, ExpectedResult = 10)]
 
+        // Large parcel
         [TestCase(5, 80, 7, ExpectedResult = 15)]
         [TestCase(20, 30, 97, ExpectedResult = 15)]
         [TestCase(50, 70, 97, ExpectedResult = 15)]
         // over weight
-        [TestCase(49, 43, 27, 7, ExpectedResult = 17)]
+        [TestCase(49, 70, 27, 7, ExpectedResult = 17)]
 
+        // XL parcel
         [TestCase(5, 7, 100, ExpectedResult = 25)]
         [TestCase(5, 70, 197, ExpectedResult = 25)]
         [TestCase(50, 70, 200, ExpectedResult = 25)]
         [TestCase(100, 150, 97, ExpectedResult = 25)]
         // over weight
-        [TestCase(49, 43, 27, 11, ExpectedResult = 27)]
+        [TestCase(49, 150, 27, 11, ExpectedResult = 27)]
         public int GetParcelCost_GetCorrectParcelCost_ExpectedParcelCost(int length, int width, int height, int weight = 1)
         {
             // Arrange

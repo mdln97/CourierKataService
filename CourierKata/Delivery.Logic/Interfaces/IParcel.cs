@@ -10,6 +10,8 @@ namespace Delivery.Logic.Interfaces
 
         int Height { get; }
 
+        int Weight { get; }
+
         ParcelSizeType ParcelSize { get; }
 
         int ParcelCost { get; }
