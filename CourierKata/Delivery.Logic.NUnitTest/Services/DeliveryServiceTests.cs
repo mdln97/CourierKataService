@@ -24,7 +24,7 @@ namespace Delivery.Logic.NUnitTest.Services
             List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),
                 ParcelHelper.GetLargeParcel(), ParcelHelper.GetMediumParcel(), ParcelHelper.GetXLParcel() };
 
-            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
+            double expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
                 + ParcelHelper.GetMediumParcel().ParcelCost + ParcelHelper.GetXLParcel().ParcelCost;
 
             // Act
@@ -55,7 +55,7 @@ namespace Delivery.Logic.NUnitTest.Services
             List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),
                };
 
-            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3;
+            double expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3;
 
             // Act
             var actualCost = new DeliveryService().CalculateDeliveryCosts(parcels);
@@ -74,7 +74,7 @@ namespace Delivery.Logic.NUnitTest.Services
             List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),
                 ParcelHelper.GetLargeParcel(), ParcelHelper.GetMediumParcel(), ParcelHelper.GetXLParcel() };
 
-            int expectedCosts = 2 * (ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
+            double expectedCosts = 2 * (ParcelHelper.GetSmallParcel().ParcelCost + ParcelHelper.GetLargeParcel().ParcelCost
                 + ParcelHelper.GetMediumParcel().ParcelCost + ParcelHelper.GetXLParcel().ParcelCost);
 
             // Act
@@ -105,7 +105,7 @@ namespace Delivery.Logic.NUnitTest.Services
             List<IParcel> parcels = new List<IParcel>() { ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),ParcelHelper.GetSmallParcel(),
                };
 
-            int expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3 * 2;
+            double expectedCosts = ParcelHelper.GetSmallParcel().ParcelCost * 3 * 2;
 
             // Act
             var actualCost = new DeliveryService().CalculateSpeedyDeliveryCosts(parcels);

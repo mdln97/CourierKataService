@@ -4,16 +4,16 @@ namespace Delivery.Logic.Interfaces
 {
     public interface IParcel
     {
-        int Length { get; }
+        double Length { get; }
 
-        int Width { get; }
+        double Width { get; }
 
-        int Height { get; }
+        double Height { get; }
 
-        int Weight { get; }
+        double Weight { get; }
 
         ParcelSizeType ParcelSize { get; }
 
-        int ParcelCost { get; }
+        double ParcelCost { get; }
     }
 }

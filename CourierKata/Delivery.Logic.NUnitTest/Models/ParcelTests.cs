@@ -117,7 +117,7 @@ namespace Delivery.Logic.NUnitTest.Models
         [TestCase(100, 150, 97, ExpectedResult = 25)]
         // over weight
         [TestCase(49, 150, 27, 11, ExpectedResult = 27)]
-        public int GetParcelCost_GetCorrectParcelCost_ExpectedParcelCost(int length, int width, int height, int weight = 1)
+        public double GetParcelCost_GetCorrectParcelCost_ExpectedParcelCost(int length, int width, int height, int weight = 1)
         {
             // Arrange
 

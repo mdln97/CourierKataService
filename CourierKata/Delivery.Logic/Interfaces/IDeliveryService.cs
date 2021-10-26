@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Delivery.Logic.Models;
+using System.Collections.Generic;
 
 namespace Delivery.Logic.Interfaces
 {
     public interface IDeliveryService
     {
-        int CalculateDeliveryCosts(IEnumerable<IParcel> parcels);
+        double CalculateDeliveryCosts(IEnumerable<IParcel> parcels);
 
-        int CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels);
+        double CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels);
+
+        OrderSummary GetOrderSummary(IEnumerable<IParcel> parcels);
     }
 }

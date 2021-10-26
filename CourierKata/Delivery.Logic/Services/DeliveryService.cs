@@ -1,4 +1,5 @@
 ﻿using Delivery.Logic.Interfaces;
+using Delivery.Logic.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,14 +7,22 @@ namespace Delivery.Logic.Services
 {
     public class DeliveryService : IDeliveryService
     {
-        public int CalculateDeliveryCosts(IEnumerable<IParcel> parcels)
+        public double CalculateDeliveryCosts(IEnumerable<IParcel> parcels)
         {
             return parcels.Sum(x => x.ParcelCost);
         }
 
-        public int CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels)
+        public double CalculateSpeedyDeliveryCosts(IEnumerable<IParcel> parcels)
         {
             return parcels.Sum(x => x.ParcelCost) * 2;
+        }
+
+        public OrderSummary GetOrderSummary(IEnumerable<IParcel> parcels)
+        {
+            double speedyDeliveryCost = CalculateSpeedyDeliveryCosts(parcels);
+            double deliveryCost = CalculateDeliveryCosts(parcels);
+
+            return new OrderSummary(parcels, speedyDeliveryCost, deliveryCost);
         }
     }
 }
